@@ -1,0 +1,55 @@
+# Inspired by https://github.com/topotam/cobalt_aliases
+# All the paths are for the CTRO training labs machine
+
+sub execasmWrapper {
+    local('$bid $path @args');
+    $path = $1;
+	@args = $2;
+    $bid = @args[0];
+	remove(@args, $bid);
+
+    blog2($bid, "Running " . $path . " with arguments '" . join(' ', @args)"'")
+
+    # @TODO: can we re-escape the arguments, otherwise we may run into trouble. Or maybe use $0?
+
+	bexecute_assembly!($bid, $path, join(' ', @args));
+}
+
+beacon_command_register("rubeus", "Convenience alias", "All arguments are passed to the executable");
+alias rubeus {
+    execasmWrapper("C:/Tools/Rubeus/Rubeus/bin/Release/Rubeus.exe", @_);
+}
+
+beacon_command_register("certify", "Convenience alias", "All arguments are passed to the executable");
+alias certify {
+    execasmWrapper("C:/Tools/Certify/Certify/bin/Release/Certify.exe", @_);
+}
+
+beacon_command_register("seatbelt", "Convenience alias", "All arguments are passed to the executable");
+alias seatbelt {
+    execasmWrapper("C:/Tools/Seatbelt/Seatbelt/bin/Release/Seatbelt.exe", @_);
+}
+
+beacon_command_register("sharpersist", "Convenience alias", "All arguments are passed to the executable");
+alias sharpersist {
+    execasmWrapper("C:/Tools/SharPersist/SharPersist/bin/Release/SharPersist.exe", @_);
+}
+
+beacon_command_register("sharpup", "Convenience alias", "All arguments are passed to the executable");
+alias sharpup {
+    execasmWrapper("C:/Tools/SharpUp/SharpUp/bin/Release/SharpUp.exe", @_);
+}
+
+beacon_command_register("sharpview", "Convenience alias", "All arguments are passed to the executable");
+alias sharpview {
+    execasmWrapper("C:/Tools/SharpView/SharpView/bin/Release/SharpView.exe", @_);
+}
+
+
+# Demo block for copy+paste
+beacon_command_register("todo", "Convenience alias", "All arguments are passed to the executable");
+alias todo {
+    execasmWrapper("C:/Tools/todo/todo/bin/Release/todo.exe", @_);
+}
+
+
